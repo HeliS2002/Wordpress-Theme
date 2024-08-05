@@ -9,20 +9,25 @@
     <?php wp_head(); ?>
 </head>
 
-<body class="bg-info">
+<body class="bg-secondary">
 
-    <div class="container">
+    <div>
         <?php
         if (have_posts()):
             while (have_posts()):
                 the_post(); ?>
-                <article>
-                    <h2 class="text-center mt-4"><?php the_title(); ?></h2>
-                    <?php if (has_post_thumbnail()): ?>
-                        <img src="<?php the_post_thumbnail_url(); ?>" alt="<?php the_title(); ?>" class="small-image">
-                    <?php endif; ?>
-                    <?php the_content(); ?>
-                </article>
+               <article class="card mb-4 shadow-sm">
+    <?php if (has_post_thumbnail()): ?>
+        <img class="card-img-top" src="<?php the_post_thumbnail_url('medium'); ?>" alt="<?php the_title(); ?>">
+    <?php endif; ?>
+    <div class="card-body bg-dark text-white">
+        <h2 class="card-title text-center fw-bold"><?php the_title(); ?></h2>
+        <div class="card-text">
+            <?php the_content(); ?>
+        </div>
+    </div>
+</article>
+
             <?php endwhile;
         else:
             echo '<p>No content found</p>';
@@ -32,5 +37,4 @@
     </div>
 <?php wp_footer(); ?>
 </body>
-
 </html>
